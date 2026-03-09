@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Resume Generator - Build Your Career Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ==================== HEADER/NAVBAR ==================== -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <span class="logo-icon">💼</span>
+                <span class="logo-text">ResumeReverse</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#examples" class="nav-link">Examples</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Enter Your Dream Job.<br><span class="gradient-text">We'll Build Your Path.</span></h1>
+            <p class="hero-subtitle"></p>
+            
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="jobInput" 
+                    class="job-input" 
+                    placeholder="e.g. AI Engineer, Full Stack Developer, Data Scientist..."
+                    autocomplete="off"
+                >
+                <button class="cta-button" id="generateBtn">Generate Roadmap</button>
+            </div>
+            
+            <p class="hero-hint">💡 Try: AI Engineer, Full Stack Developer, UI/UX Designer, Data Scientist</p>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS SECTION ==================== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🎯</div>
+                    <h3>Enter Your Dream Job</h3>
+                    <p>Tell us the role you want to achieve. Be specific or general—we've got you covered.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">✨</div>
+                    <h3>AI Analyzes Your Goal</h3>
+                    <p>Our system breaks down the job into actionable skills, courses, and projects.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🗺️</div>
+                    <h3>Get Your Roadmap</h3>
+                    <p>Receive a detailed timeline with milestones to reach your career goal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ROADMAP OUTPUT SECTION ==================== -->
+    <section class="roadmap-section" id="roadmapOutput" style="display: none;">
+        <div class="container">
+            <!-- Job Title Badge -->
+            <div class="roadmap-header">
+                <div class="job-badge">
+                    <div class="job-badge-icon">💼</div>
+                    <div>
+                        <h2 class="roadmap-title" id="roadmapJobTitle"></h2>
+                        <p class="roadmap-timeline" id="roadmapTimeline"></p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-actions">
+                    <button class="action-button" id="copyBtn" title="Copy roadmap to clipboard">📋 Copy</button>
+                    <button class="action-button" id="downloadBtn" title="Download as PDF">📥 PDF</button>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="skills">
+                    <span class="tab-icon">🛠️</span> Skills
+                </button>
+                <button class="tab-button" data-tab="courses">
+                    <span class="tab-icon">📚</span> Courses
+                </button>
+                <button class="tab-button" data-tab="projects">
+                    <span class="tab-icon">🚀</span> Projects
+                </button>
+                <button class="tab-button" data-tab="timeline">
+                    <span class="tab-icon">📅</span> Timeline
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            
+            <!-- Skills Tab -->
+            <div class="tab-content active" id="skills-tab">
+                <div class="skills-grid" id="skillsContainer"></div>
+            </div>
+
+            <!-- Courses Tab -->
+            <div class="tab-content" id="courses-tab">
+                <div class="courses-grid" id="coursesContainer"></div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div class="tab-content" id="projects-tab">
+                <div class="projects-grid" id="projectsContainer"></div>
+            </div>
+
+            <!-- Timeline Tab -->
+            <div class="tab-content" id="timeline-tab">
+                <div class="timeline" id="timelineContainer"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EXAMPLES SECTION ==================== -->
+    <section class="examples-section" id="examples">
+        <div class="container">
+            <h2 class="section-title">Popular Paths</h2>
+            <p class="section-subtitle">Start with one of these popular career paths</p>
+            
+            <div class="examples-grid">
+                <div class="example-card" data-job="AI Engineer">
+                    <div class="example-icon">🤖</div>
+                    <h3>AI Engineer</h3>
+                    <p>Build AI/ML systems and models</p>
+                </div>
+                
+                <div class="example-card" data-job="Full Stack Developer">
+                    <div class="example-icon">💻</div>
+                    <h3>Full Stack Developer</h3>
+                    <p>Master frontend and backend</p>
+                </div>
+                
+                <div class="example-card" data-job="UI/UX Designer">
+                    <div class="example-icon">🎨</div>
+                    <h3>UI/UX Designer</h3>
+                    <p>Create beautiful user experiences</p>
+                </div>
+                
+                <div class="example-card" data-job="Data Scientist">
+                    <div class="example-icon">📊</div>
+                    <h3>Data Scientist</h3>
+                    <p>Extract insights from data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">💼</span>
+                        <span class="logo-text">ResumeReverse</span>
+                    </div>
+                    <p>Build your perfect career roadmap</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#home">Contact</a></li>
+                        <li><a href="#home">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 ResumeReverse. All rights reserved. | Build your dream career today.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== LOADING SPINNER ==================== -->
+    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generating your roadmap...</p>
+    </div>
+
+    <!-- ==================== DEVELOPER CONSOLE (Hidden) ==================== -->
+    <div class="dev-console" id="devConsole">
+        <div class="console-header">
+            <span>Console (Ctrl+Shift+D to close)</span>
+            <button class="console-close" id="closeConsole">✕</button>
+        </div>
+        <div class="console-output" id="consoleOutput"></div>
+        <div class="console-input-wrapper">
+            <span class="console-prompt">$ </span>
+            <input type="text" class="console-input" id="consoleInput" placeholder="Enter job title...">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
